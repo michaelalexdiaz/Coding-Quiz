@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600&family=Roboto&display=swap"
+        rel="stylesheet">
+    <title>Spencer's Quiz Game</title>
+</head>
+
+<body>
+    <nav>
+        <div id="highscores"><a href="#highscore-list">View Highscores</a></div>
+        <div id="score" class='scoreboard'>score</div>
+        <div class="time-box">
+            <h3>Time Left:</h3>
+            <section id="timer"></section>
+        </div>
+    </nav>
+    <section id="container">
+        <div id="question-container" class="hide">
+            <div id="question" class="question-text">Question</div>
+            <div id="answer-buttons" class="button-grid">
+                <button class="button">Answer 1</button>
+                <button class="button">Answer 2</button>
+                <button class="button">Answer 3</button>
+                <button class="button">Answer 4</button>
+            </div>
+        </div>
+        <div class="control">
+            <button id="start-button" class="start-button button">Start</button>
+            <button id="next-button" class="next-button hide button">Next</button>
+        </div>
+    </section>
+    <section id="enter-hiscore" class="hide">
+        <label for="user-name">Player Name: </label>
+        <input id="username">
+        <label for="user-score">Score: </label>
+        <input id="playerscore">
+        <button id="save">SAVE</button>
+    </section>
+    <div id="card">
+        <h2>Last Saved Score</h2>
+        <p>Name: <span id="saved-name"></span></p>
+        <p>Score: <span id="saved-score"></span></p>
+    </div>
+    <div>
+        <h2>Highscores</h2>
+        <ul id="highscore-list">
+        </ul>
+    </div>
+    <script src="script.js"></script>
+</body>
