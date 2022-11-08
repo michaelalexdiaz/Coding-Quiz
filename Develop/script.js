@@ -10,15 +10,56 @@ const cardEl = document.getElementById('card')
 const saveButton = document.getElementById('save')
 const highscoreList = document.getElementById('highscore-list')
 let allScores =localStorage.getItem('allScores')||[]
-
-let questionCounter = 0
-const scorePoints = 100
-const maxQuestions = 7
-
-let shuffledQuestions
-let currentQuestionIndex
 let playerScore = 0
 let timeLeft = 30;
+
+const questions = [
+    {
+        question: 'Commonly used data types DO NOT include:',
+        answers:[
+            {text: "strings", correct: false},
+            {text: "booleans", correct: false},
+            {text: "alerts", correct: true},
+            {text: "numbers", correct: false}
+        ]
+    },
+    {
+        question: 'The condition in an if / else statement is enclosed within ____.',
+        answers:[
+            {text: "curly brackets", correct: false},
+            {text: "quotes", correct: false},
+            {text: "parentheses", correct: true},
+            {text: "square brackets", correct: false}
+        ]
+    },
+    {
+        question: 'Arrays in JavaScript can be used to store ____.',
+        answers:[
+            {text: "all of the above", correct: true},
+            {text: "other arrays", correct: false},
+            {text: "numbers and strings", correct: false},
+            {text: "booleans", correct: false}
+        ]
+    },
+    {
+        question: 'String values must be enclosed within ____ when being assigned to variables.',
+        answers:[
+            {text: "commas", correct: false},
+            {text: "quotes", correct: true},
+            {text: "curly brackets", correct: false},
+            {text: "parentheses", correct: false}
+        ]
+    },
+    {
+        question: 'A very useful tool used during development and debugging for printing content to the debugger is:',
+        answers:[
+            {text: "console.log", correct: true},
+            {text: "terminal / bash", correct: false},
+            {text: "for loops", correct: false},
+            {text: "JavaScript", correct: false}
+        ]
+    }
+]
 
 
 startButton.addEventListener("click", startQuiz)
@@ -30,12 +71,12 @@ nextButton.addEventListener('click', () => {
 function startQuiz(){
     startButton.classList.add("hide")
     enterHiscoreEl.classList.add('hide')
-    // cardEl.classList.add('hide')
     questionContainerEl.classList.remove("hide")
     shuffledQuestions = questions.sort(() => Math.random() -.5)
     currentQuestionIndex = 0
     playerScore = 0
-    nextQuestion()
+    nextQuestion();
+    setTime();
 }
 
 function setTime() {
@@ -45,17 +86,17 @@ function setTime() {
 
         if (timeLeft === 0) {
             clearInterval(timerInterval);
-            timesUp();
+            timeEl.textContent = "Times Up!";
+            questionContainerEl.classList.add("hide");
+            nextButton.classList.add("hide");
+            startButton.innerText = 'Restart';
+            startButton.classList.remove('hide');
+            enterHiscoreEl.classList.remove('hide');
         }
     }, 1000)
 }
 
 
-function timesUp() {
-    timeEl.textContent = "Times Up!"
-}
-
-setTime();
 
 
 function showQuestion(question) {
@@ -97,20 +138,18 @@ function selectAnswer(e) {
     if (shuffledQuestions.length > currentQuestionIndex + 1){
     nextButton.classList.remove('hide')
     } else {
-        startButton.innerText = 'Restart'
-        startButton.classList.remove('hide')
-        enterHiscoreEl.classList.remove('hide')
+        questionContainerEl.classList.add("hide");
+        startButton.innerText = 'Restart';
+        startButton.classList.remove('hide');
+        enterHiscoreEl.classList.remove('hide');
     }
 } 
 
 function nextQuestion() {
     resetQuestion()
     showQuestion(shuffledQuestions[currentQuestionIndex])
-    // if (currentQuestionIndex > maxQuestions) {
-    //     localStorage.setItem('mostRecentScore', score)
-    //     return window.location.assign('/end.html')
-    // }
 
+    
 }
 
 function setStatusClass(element, correct) {
@@ -130,12 +169,10 @@ function clearStatusClass(element) {
 
 function saveLastScore() {
     var userScore = {
-    //username should be a variable that is tied to the input field 
       name: username.value,
       score: playerscore.value,
     };
     allScores.push(userScore)
-    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
     localStorage.setItem("lastScore", JSON.stringify(allScores));
   }
   
@@ -151,6 +188,8 @@ function saveLastScore() {
     }
   }
 
+  
+
   saveButton.addEventListener("click", function(event) {
     event.preventDefault();
     saveLastScore();
@@ -162,68 +201,4 @@ function saveLastScore() {
     }
       init();
 
-const questions = [
-    {
-        question: 'Where does the src="script.js" go on the HTML page?',
-        answers:[
-            {text: "In the head element", correct: false},
-            {text: "After the body", correct: false},
-            {text: "At the end of the body", correct: true},
-            {text: "It doesn't go in the HTML", correct: false}
-        ]
-    },
-    {
-        question: 'What is the tag used for URL links?',
-        answers:[
-            {text: "<a>", correct: true},
-            {text: "<p>", correct: false},
-            {text: "<link>", correct: false},
-            {text: "<url>", correct: false}
-        ]
-    },
-    {
-        question: 'How do you target an ID in css?',
-        answers:[
-            {text: "id {", correct: false},
-            {text: ". {", correct: false},
-            {text: "# {", correct: true},
-            {text: ":: {", correct: false}
-        ]
-    },
-    {
-        question: 'Which array method is used to combine arrays?',
-        answers:[
-            {text: "array.join", correct: false},
-            {text: "array.concat", correct: true},
-            {text: "array.fill", correct: false},
-            {text: "array.group", correct: false}
-        ]
-    },
-    {
-        question: 'Which of these is not a way to define a variable in JS?',
-        answers:[
-            {text: "let", correct: false},
-            {text: "const", correct: false},
-            {text: "var", correct: false},
-            {text: "consts", correct: true}
-        ]
-    },
-    {
-        question: 'What is necessary for a function to be invoked/called on?',
-        answers:[
-            {text: "[]", correct: false},
-            {text: "{}", correct: false},
-            {text: "An argument", correct: false},
-            {text: "()", correct: true}
-        ]
-    },
-    {
-        question: 'Which NBA team is the best?',
-        answers:[
-            {text: "Boston Celtics", correct: false},
-            {text: "Golden State Warriors", correct: false},
-            {text: "Chicago Bulls", correct: true},
-            {text: "LA Lakers", correct: false}
-        ]
-    }
-]
+
