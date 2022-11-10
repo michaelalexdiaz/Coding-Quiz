@@ -60,12 +60,15 @@ nav {
 #container {
     display: grid;
     justify-content: center;
+    text-align: center;
     box-sizing: border-box;
+    align-content: center;
     box-shadow: 0 0 10px 2px;
     background-color: rgb(165, 34, 165);
     border-radius: 8px;
     width: 35%;
     max-height: 40%;
+    padding: 30px;
 
 }
 

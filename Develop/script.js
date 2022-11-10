@@ -1,4 +1,5 @@
 const timeEl = document.getElementById("timer");
+const introEl = document.getElementById("intro");
 const startButton = document.getElementById("start-button")
 const nextButton = document.getElementById("next-button")
 const questionContainerEl = document.getElementById("question-container")
@@ -11,7 +12,7 @@ const saveButton = document.getElementById('save')
 const highscoreList = document.getElementById('highscore-list')
 let allScores =localStorage.getItem('allScores')||[]
 let playerScore = 0
-let timeLeft = 30;
+let timeLeft = 60;
 
 const questions = [
     {
@@ -69,6 +70,7 @@ nextButton.addEventListener('click', () => {
 })
 
 function startQuiz(){
+    introEl.classList.add("hide")
     startButton.classList.add("hide")
     enterHiscoreEl.classList.add('hide')
     questionContainerEl.classList.remove("hide")
@@ -157,6 +159,7 @@ function setStatusClass(element, correct) {
         element.classList.add('correct')
     } else {
         element.classList.add('incorrect')
+        timeLeft -= 3;
     }
 }
 
