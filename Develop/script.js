@@ -148,7 +148,6 @@ function selectAnswer(e) {
 function nextQuestion() {
     resetQuestion()
     showQuestion(shuffledQuestions[currentQuestionIndex])
-
     
 }
 
