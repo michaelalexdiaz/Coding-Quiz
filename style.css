@@ -107,28 +107,18 @@ nav {
     align-items: center;
 }
 
-.start-button {
+.start-button .next-button{
     font-weight: bold;
     padding: 8px 16px;
 }
 
-.next-button {
-    font-weight: bold;
-    padding: 8px 16px;
+#enter-hiscore #card {
+    margin-top: 25px;
 }
 
 .hide {
     display: none;
 }
-
-#enter-hiscore {
-    margin-top: 25px;
-}
-
-#card {
-    margin-top: 100px;
-}
-
 
 ul {
     margin: 10px;
